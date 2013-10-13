@@ -9,7 +9,7 @@ nav.navbar.navbar-inverse role="navigation"
         a.navbar-brand href="/" GeoPics
       
       .collapse.navbar-collapse
-        form#venue-search.navbar-form.navbar-right
+        form#venue-search.navbar-form.navbar-right method="get" action="/venues/index"
           .form-group
             label.control-label for="venue_lat" Latitude 
             input#venue_lat type="text"

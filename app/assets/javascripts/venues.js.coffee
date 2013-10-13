@@ -6,15 +6,15 @@ jQuery ->
 
 	$('#search-button').click (event) -> 
 		event.preventDefault()
-		console.log ENV[FOURSQUARE_ID]
+
 		lat = $("#venue_lat").val()
 		long = $("#venue_long").val()
-		radius = $("search_radius").val()
-		# raise errors maybe! 
+		radius = $("#search_radius").val() 
 		$.ajax
-			url: "http://api.foursquare.com/v2/venues/explore"
+			url: "/venues/by_location"
 			data: 
-				ll: "#{lat},#{long}"
+				venue_lat: lat
+				venue_long: long
 				radius: radius
 			type: "get"
 			success: (response) ->
