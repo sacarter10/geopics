@@ -1,34 +1,15 @@
 doctype html
 html
-  head
-    title Venuegram
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
-    = csrf_meta_tags
-    
-  body
-    nav.navbar.navbar-default role="navigation"
-      .navbar-header
-        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        
-        a.navbar-brand href="/" Venuegram
-      
-      .collapse.navbar-collapse
-        form#venue-search.navbar-form.navbar-right
-          .form-group
-            label.control-label for="lat-lng" Latitude & Longitude
-            input#lat-lng.form-control.col-xs-2 type="text" placeholder="37.8, -122.27" required="true"
+head
+  title GeoPics
+  = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+  = javascript_include_tag "application", "data-turbolinks-track" => true
+  = csrf_meta_tags
 
-          .form-group
-            label.control-label for="radius" Radius in meters
-            input#radius.form-control.col-xs-2 type="text" placeholder="1000" required="true"
-            
-          button#search-btn.btn.btn-info type="submit" Find Venues!
-          
-    .container
-      = yield
+body
+
+div.navbar.navbar-inverse
+
+what the fuck!!!! 
+= yield 
 
