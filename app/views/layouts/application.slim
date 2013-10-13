@@ -1,15 +1,14 @@
 doctype html
 html
-head
-  title GeoPics
-  = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-  = javascript_include_tag "application", "data-turbolinks-track" => true
-  = csrf_meta_tags
+	head
+    title Geopics
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    
+	body
 
-body
+		= render "layouts/navbar"
 
-div.navbar.navbar-inverse
-
-what the fuck!!!! 
-= yield 
+		= yield 
 
