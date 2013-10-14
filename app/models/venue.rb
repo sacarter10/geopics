@@ -3,7 +3,6 @@ require 'rest-client'
 
 class Venue < ActiveRecord::Base
 	def self.find_nearby(venues_params)
-		p venues_params
 		uri = Addressable::URI.new({
 			scheme: "https",
 			host: "api.foursquare.com",
@@ -18,8 +17,20 @@ class Venue < ActiveRecord::Base
 		}).to_s
 
 		response = JSON.parse(RestClient.get(uri))
-		p "things!"
+		venue_array = response["response"]["venues"]
 		
-		response["response"]["venues"]
+		venue_array.empty? ? nil : venue_array 
+	end
+
+	def self.valid_venue_query?(venues_params)
+		begin
+			lat = Float(venues_params[:venue_lat])
+			lng = Float(venues_params[:venue_lng])
+			radius = Float(venues_params[:radius])
+		rescue
+			return false
+		end
+
+		((-90..90).include?(lat) && (-180..180).include?(lng) && (1..400800).include?(radius))
 	end
 end

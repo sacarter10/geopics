@@ -6,7 +6,7 @@
 loadMap = (lat, lng) ->
 	mapOptions =
     center: new google.maps.LatLng(lat, lng)
-    zoom: 12
+    zoom: 14
     mapTypeId: google.maps.MapTypeId.ROADMAP
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
 
@@ -15,7 +15,12 @@ markVenues = (venues, map) ->
  		marker = new google.maps.Marker
     	position: new google.maps.LatLng(venue["location"]["lat"], venue["location"]["lng"])
     	map: map
-    	title: venue["name"]	
+    	title: venue["name"]
+
+    google.maps.event.addListener(marker, 'click', venueClick.bind(null, venue['id']))
+
+venueClick = (venueId) ->
+  console.log venueId
 
 $ ->
   loadMap(37.48, -122.24)
@@ -23,7 +28,7 @@ $ ->
     event.preventDefault()
     lat = $("#venue_lat").val()
     lng = $("#venue_lng").val()
-    map = loadMap(lat, lng)
+    
     $.ajax
       url: "/venues/by_location"
       data:
@@ -33,9 +38,14 @@ $ ->
       type: "get"
 
       error: (jqXHR, status, errorThrown) ->
-        console.log status
+        if errorThrown == "Internal Server Error"
+          $('#errors').html("Something has gone wrong...") 
+        else
+          $('#errors').html(jqXHR['responseText'])
 
       success: (response, status, jqXHR) ->
+        $('#errors').empty()
+        map = loadMap(lat, lng)
         markVenues(response, map)
 
 

@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131013171527) do
 
-  create_table "maps", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "venues", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
