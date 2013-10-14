@@ -10,6 +10,6 @@ class VenuesController < ApplicationController
 	end
 
 	def venues_params
-		params.permit(:venue_lat, :venue_long, :radius)
+		params.permit(:venue_lat, :venue_lng, :radius)
 	end
 end

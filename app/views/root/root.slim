@@ -1,2 +1,18 @@
-img src="http://maps.googleapis.com/maps/api/staticmap?center=Redwood%City,CA&zoom=14&size=400x400&sensor=false"
+.well.pull-left
+  div#map-canvas style="width: 400px; height: 400px"
 
+div.pull-right
+	form#venue-search.navbar-form.navbar-right method="get" action="/venues/index"
+          .form-group
+            label.control-label for="venue_lat" Latitude 
+            input#venue_lat type="text" placeholder="37.48"
+
+          .form-group
+            label.control-label for="venue_lng" Longitutde
+            input#venue_lng type="text" placeholder="-122.24"
+
+          .form-group
+            label.control-label for="search_radius" Maximum distance (meters)
+            input#search_radius type="text" placeholder = 5000
+            
+          button#search-button.btn.btn-info type="submit" Search

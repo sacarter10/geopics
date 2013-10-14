@@ -5,11 +5,11 @@ class Venue < ActiveRecord::Base
 	def self.find_nearby(venues_params)
 		p venues_params
 		uri = Addressable::URI.new({
-			scheme: "http",
+			scheme: "https",
 			host: "api.foursquare.com",
-			path: "/v2/venues/explore",
+			path: "/v2/venues/search",
 			query_values: {
-				ll: "#{venues_params[:venue_lat]},#{venues_params[:venue_long]}",
+				ll: "#{venues_params[:venue_lat]},#{venues_params[:venue_lng]}",
 				radius: venues_params[:radius],
 				client_id: ENV['FOURSQUARE_ID'],
 				client_secret: ENV['FOURSQUARE_SECRET'],
@@ -17,7 +17,9 @@ class Venue < ActiveRecord::Base
 			}
 		}).to_s
 
-		response = RestClient.get(uri)
-		p response
+		response = JSON.parse(RestClient.get(uri))
+		p "things!"
+		
+		response["response"]["venues"]
 	end
 end
