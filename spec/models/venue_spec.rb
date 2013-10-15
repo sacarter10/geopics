@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Venue do
+  describe "self.find" do 
+    it "return a hash of venue data given a valid id" do 
+      venue = Venue.find("43c12ef9f964a520392d1fe3")
+      venue['name']
+    end
+  end
+
   describe "self.find_nearby" do 
   	it "returns nil when no venues found" do
   		Venue.find_nearby( { :venue_lat => 1,
