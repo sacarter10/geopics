@@ -2,7 +2,7 @@ require 'addressable/uri'
 require 'rest-client'
 
 class Venue < ActiveRecord::Base
-	attr_accessor :id, :name, :contact, :location, :pictures
+	attr_accessor :name, :url, :pictures
 
 	def self.find_nearby(venues_params)
 		uri = Addressable::URI.new({
@@ -37,8 +37,6 @@ class Venue < ActiveRecord::Base
 	end
 
 	def self.find(venue_id)
-		p "the id is #{venue_id}"
-
 		uri = Addressable::URI.new({
 			scheme: "https",
 			host: "api.foursquare.com",
@@ -53,24 +51,33 @@ class Venue < ActiveRecord::Base
 		response = RestClient.get(uri)
 
 		venue = JSON.parse(response)
-		venue["response"]["venue"]
+		# return self.new(venue["response"]["venue"])
 	end
 
-	def self.fetch_pictures(venue)
+	def initialize(venue_hash)
+		@id = venue_hash['id']
+		@name = venue_hash['name']
+		@lat = venue_hash['location']['lat']
+		@lng = venue_hash['location']['lng']
+		@address = venue_hash['location']['address']
+		@url = venue_hash['url']
+	end
+
+	def fetch_pictures
 		uri = Addressable::URI.new({
 			scheme: "https",
 			host: "api.instagram.com",
 			path: "/v1/media/search",
 			query_values: {
-				lat: venue["location"]["lat"],
-				lng: venue["location"]["lng"],
-				distance: 20, # is 20 m very far?
+				lat: self.lat,
+				lng: self.lng,
+				distance: 20, 
 				client_id: ENV['INSTAGRAM_ID'],
 				client_secret: ENV['INSTAGRAM_SECRET'],
 				v: 20131013
 			}
 		}).to_s
 
-		pictures = RestClient.get(uri)
+		venue.pictures = RestClient.get(uri)
 	end
 end

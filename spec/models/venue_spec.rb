@@ -1,6 +1,20 @@
 require 'spec_helper'
 
 describe Venue do
+  describe "initialize" do 
+    it "takes hash of attributes and creates a new Venue object" do
+      venue = Venue.new(name: "Cool Venue", url: 'www.coffee.com')
+
+      venue.instance_of?(Venue).should be_true
+    end
+
+    it "sets name" do 
+      venue = Venue.new(name: "Cool Venue", url: 'www.coffee.com')
+
+      venue.name.should_equal "Cool Venue"
+    end
+  end
+
   describe "self.find" do 
     it "return a hash of venue data given a valid id" do 
       venue = Venue.find("43c12ef9f964a520392d1fe3")
@@ -78,6 +92,10 @@ describe Venue do
         :radius => 500
         }).should be_true
     end
+
+  end
+
+  describe "fetch_pictures" do
 
   end
 end

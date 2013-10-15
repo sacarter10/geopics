@@ -29,6 +29,7 @@ gem 'slim'
 gem 'rest-client'
 gem 'addressable'
 gem 'pg'
+gem 'ejs'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -2,6 +2,23 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+displayVenue = (venue_id) ->
+  console.log "displaying venue #{venue_id}"
+  $.ajax
+      url: "/venues/#{venue_id}"
+      type: "get"
+
+      error: (jqXHR, status, errorThrown) ->
+        if errorThrown == "Internal Server Error"
+          $('#errors').html("Something has gone wrong...") 
+        else
+          $('#errors').html(jqXHR['responseText'])
+
+      success: (response, status, jqXHR) ->
+        $('#errors').empty()
+        console.log "here we are"
+        $('#venue-detail').html(JST['venue_detail']({venue: response}))
+        
 
 loadMap = (lat, lng) ->
 	mapOptions =
@@ -17,7 +34,7 @@ markVenues = (venues, map) ->
     	map: map
     	title: venue["name"]
 
-    google.maps.event.addListener(marker, 'click', venueClick.bind(null, venue['id']))
+    google.maps.event.addListener(marker, 'click', displayVenue.bind(null, venue['id']))
 
 venueClick = (venueId) ->
   console.log venueId

@@ -13,10 +13,14 @@ class VenuesController < ApplicationController
 	end
 
 	def show
-		@venue = Venue.find(venues_params)
+		@venue = Venue.find(venues_params[:id])
+		# @venue.fetch_pictures 
+
+		render :json => @venue
 	end
 
+	private
 	def venues_params
-		params.permit(:venue_lat, :venue_lng, :radius)
+		params.permit(:venue_lat, :venue_lng, :radius, :id)
 	end
 end
