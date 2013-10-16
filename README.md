@@ -2,8 +2,8 @@ geopics
 =======
 Search Foursquare venues by location and browse Instagram pictures taken at that location. Try it out at http://geopics.herokuapp.com.
 
-<ul>
 Technologies used:
+<ul>
 <li> Ruby 2.0.0 </li>
 <li> Rails 4 </li>
 <li> CoffeeScript </li>
