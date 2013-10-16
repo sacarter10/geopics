@@ -9,22 +9,25 @@ describe "venue information and thumbnails" do
 		end
 
 		xit "should display venue name" do 
-			# click on a marker
 			# page should_contain(marker's title)
 		end
 
 		xit "should display thumbnails if venue has pictures" do
 			# click on a marker
+			# find('#venue-details').should have_selector('img')
 		end
 
 		xit "should not display thumbnails if venue has no pictures" do
 			# click on a marker with no pictures
+			# find('#venue-details').should_not have_selector('img')
+			# find('#venue-details').should have_content('No images found')
 		end
 	end
 
 	describe "when other parts of the map are clicked on" do
-		xit "should not do anything" do
-
+		xit "should not display any venue information" do
+			# click somewhere else
+			
 		end
 	end
 end

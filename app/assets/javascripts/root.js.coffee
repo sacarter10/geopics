@@ -1,9 +1,4 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 displayVenue = (venue_id) ->
-  console.log "displaying venue #{venue_id}"
   $.ajax
       url: "/venues/#{venue_id}"
       type: "get"
@@ -16,13 +11,14 @@ displayVenue = (venue_id) ->
 
       success: (response, status, jqXHR) ->
         $('#errors').empty()
-        console.log "here we are"
+        $('#venue-detail').css('visibility', 'visible')
         $('#venue-detail').html(JST['venue_detail']({venue: response}))
         $("#feed-button").unbind('click', pictureCarousel.bind(response.pictures)) # remove any existing listeners
         $("#feed-button").click(pictureCarousel.bind(response.pictures)) 
 
 loadMap = (lat, lng) ->
-	mapOptions =
+  $('#venue-detail').css('visibility', 'hidden')
+  mapOptions =
     center: new google.maps.LatLng(lat, lng)
     zoom: 14
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -38,7 +34,6 @@ markVenues = (venues, map) ->
     google.maps.event.addListener(marker, 'click', displayVenue.bind(null, venue['id']))
 
 pictureCarousel = (pictures) -> 
-    console.log('hey')
     event.preventDefault()
     $('#picture-modal').modal()
     $('#picture-carousel').carousel()
@@ -67,6 +62,8 @@ $ ->
 
       success: (response, status, jqXHR) ->
         $('#errors').empty()
+        if response.length is 0
+          $('#errors').html("No venues found near that location.")
         map = loadMap(lat, lng)
         markVenues(response, map)
 

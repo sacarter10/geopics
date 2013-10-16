@@ -4,19 +4,21 @@ class VenuesController < ApplicationController
 			render :text => "Invalid search inputs!", :status => 422
 		else
 			@venues = Venue.find_nearby(venues_params)
-			if @venues
-				render :json => @venues
-			else
-				render :text => "No venues found near that location!", :status => 404
-			end
+			
+			render :json => @venues
 		end
 	end
 
 	def show
 		@venue = Venue.find(venues_params[:id])
-		@venue['pictures'] = Venue.fetch_pictures(@venue['location']['lat'], @venue['location']['lng'], 20) 
 
-		render :json => @venue
+		if @venue
+			@venue['pictures'] = Venue.fetch_pictures(@venue['location']['lat'], 
+					@venue['location']['lng'], 20) 
+			render :json => @venue
+		else 
+			render :text => "Venue not found.", :status => 404
+		end
 	end
 
 	private

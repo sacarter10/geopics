@@ -19,7 +19,7 @@ describe "when the user searches for venues", :js => true do
 			fill_in 'search_radius', :with => '1'
 			click_button 'Search'
 
-			page.should have_content('No venues found')
+			find('#errors').should have_content('No venues found')
 		end
 	end
 

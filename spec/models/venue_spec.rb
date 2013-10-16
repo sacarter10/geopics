@@ -1,33 +1,21 @@
 require 'spec_helper'
 
 describe Venue do
-  describe "initialize" do 
-    it "takes hash of attributes and creates a new Venue object" do
-      venue = Venue.new(name: "Cool Venue", url: 'www.coffee.com')
-
-      venue.instance_of?(Venue).should be_true
-    end
-
-    it "sets name" do 
-      venue = Venue.new(name: "Cool Venue", url: 'www.coffee.com')
-
-      venue.name.should_equal "Cool Venue"
-    end
-  end
-
   describe "self.find" do 
     it "return a hash of venue data given a valid id" do 
       venue = Venue.find("43c12ef9f964a520392d1fe3")
-      venue['name']
+      expect(venue['name']).to eq("Velo Rouge Cafe")
     end
   end
 
   describe "self.find_nearby" do 
-  	it "returns nil when no venues found" do
-  		Venue.find_nearby( { :venue_lat => 1,
+  	it "returns an empty array when no venues found" do
+  		resp = Venue.find_nearby( { :venue_lat => 1,
   			:venue_lng => 160,
   			:radius => 1 
-  			}).should be_nil
+  			})
+
+      expect(resp).to eq([])
   	end
 
   	it "returns an array of hashes when venues are found" do
@@ -39,7 +27,7 @@ describe Venue do
 
       response.instance_of?(Array).should be_true
       response.all? {|item| item.instance_of?(Hash)}.should be_true
-  	end
+    end
   end
 
   describe "self.valid_venue_query?" do 
@@ -96,6 +84,8 @@ describe Venue do
   end
 
   describe "fetch_pictures" do
-
+    it "returns an array" do
+      Venue.fetch_pictures(37.45, -122.26, 20).class.should be(Array)
+    end
   end
 end
