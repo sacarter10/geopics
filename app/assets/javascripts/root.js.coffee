@@ -18,7 +18,8 @@ displayVenue = (venue_id) ->
         $('#errors').empty()
         console.log "here we are"
         $('#venue-detail').html(JST['venue_detail']({venue: response}))
-        
+        $("#feed-button").unbind('click', pictureCarousel.bind(response.pictures)) # remove any existing listeners
+        $("#feed-button").click(pictureCarousel.bind(response.pictures)) 
 
 loadMap = (lat, lng) ->
 	mapOptions =
@@ -36,8 +37,12 @@ markVenues = (venues, map) ->
 
     google.maps.event.addListener(marker, 'click', displayVenue.bind(null, venue['id']))
 
-venueClick = (venueId) ->
-  console.log venueId
+pictureCarousel = (pictures) -> 
+    console.log('hey')
+    event.preventDefault()
+    $('#picture-modal').modal()
+    $('#picture-carousel').carousel()
+
 
 $ ->
   loadMap(37.48, -122.24)

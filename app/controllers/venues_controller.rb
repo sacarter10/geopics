@@ -14,7 +14,7 @@ class VenuesController < ApplicationController
 
 	def show
 		@venue = Venue.find(venues_params[:id])
-		# @venue.fetch_pictures 
+		@venue['pictures'] = Venue.fetch_pictures(@venue['location']['lat'], @venue['location']['lng'], 20) 
 
 		render :json => @venue
 	end

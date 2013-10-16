@@ -30,6 +30,7 @@ gem 'rest-client'
 gem 'addressable'
 gem 'pg'
 gem 'ejs'
+gem 'underscore-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
