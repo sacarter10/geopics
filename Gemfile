@@ -39,6 +39,7 @@ end
 
 group :development, :test do 
 	gem 'rspec-rails'
+	gem 'rspec-mocks'
 	gem 'capybara'
 	gem 'selenium-webdriver'
 	gem 'better_errors'

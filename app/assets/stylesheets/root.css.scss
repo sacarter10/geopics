@@ -2,14 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+	padding: 40px 10px;
+	background-color: #EFFBFB;
+	text-align: center;
+}
+
+
+h2 {
+	font-weight: 400;
+}
+
+.well {
+	display: inline-block;
+}
+
 #map-canvas {
 	height: 500px;
 	width: 500px;
 }
 
+#venue-search {
+	width: 220px;
+	margin: 0 80px 20px 0;
+	display: inline-block;
+	text-align: left;
+	vertical-align: top;
+
+	#search-button {
+		margin-top: 5px;
+	}
+}
+
 #venue-detail {
 	visibility: hidden;
-	max-height: 500px;
+	max-height: 400px;
 	max-width: 400px;
 	overflow: auto;
 }

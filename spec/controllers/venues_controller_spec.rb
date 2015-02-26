@@ -11,6 +11,9 @@ describe VenuesController do
 		end
 
 		it "calls Venue.find_nearby" do 
+			answer = Venue.find_nearby({ venue_lat: -33.8, venue_lng: 151.21, radius: 10000 })
+			p "find nearby returned #{answer}"	
+
 			Venue.should_receive(:find_nearby)
 		end
 	end

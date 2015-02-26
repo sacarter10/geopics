@@ -5,6 +5,8 @@ class Venue < ActiveRecord::Base
 	attr_accessor :id, :name, :lat, :lng, :address, :url, :pictures
 
 	def self.find_nearby(params)
+		p "!!!!!!!!! in find_nearby with #{params}"
+
 		uri = Addressable::URI.new({
 			scheme: "https",
 			host: "api.foursquare.com",
